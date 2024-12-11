@@ -1,0 +1,23 @@
+
+
+.categories_colum{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 300px;
+  max-height: 100%;
+
+  h1{
+    margin-left: 40px;
+  }
+
+  ul{
+    list-style: none;
+  }
+
+  li{
+    margin-bottom: 20px;
+    font-size: 25px;
+  }
+
+}
