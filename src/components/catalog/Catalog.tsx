@@ -3,6 +3,7 @@ import {RootState} from "../../redux/store";
 import {useSelector} from "react-redux";
 import {fetchProducts} from "../../redux/items";
 import {useAppDispatch} from "../../redux/hooks";
+import {addItem} from "../../redux/cart";
 
 
 export const Catalog: React.FC = () => {
@@ -12,6 +13,19 @@ export const Catalog: React.FC = () => {
     useEffect(() => {
         dispatch(fetchProducts());
     }, [dispatch]);
+
+    const addToCart = (product: any) => {
+        dispatch(
+            addItem({
+                id: product.id,
+                title: product.title,
+                brand: product.brand,
+                price: product.regular_price.value,
+                image: product.image,
+                quantity: 1, // Начальное количество
+            })
+        );
+    };
 
     return (
         <div className="catalog">
@@ -49,7 +63,7 @@ export const Catalog: React.FC = () => {
                         </div>
                     )}
                     <div className="product-block__bottom">
-                        <button className="button">Добавить</button>
+                        <button className="button" onClick={() => addToCart(product)}>Добавить</button>
                     </div>
                 </div>
             ))}
