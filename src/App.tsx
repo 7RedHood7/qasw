@@ -2,13 +2,19 @@ import './scss/app.scss'
 import {MainLayout} from "./components/mainlayouts/MainLayout";
 import {Home} from "./pages/Home";
 import {Cart} from "./pages/cart/Cart";
-import {CartItem} from "./components/cartitem/CartItem";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import React from "react";
 
-export const App = () => {
+
+export const App: React.FC = () => {
     return (
-        <div>
-            <MainLayout/>
-            <Cart/>
-        </div>
+        <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<MainLayout/>}>
+                        <Route path="/" element={<Home/>}/>
+                        <Route path="/cart" element={<Cart/>}/>
+                    </Route>
+                </Routes>
+        </BrowserRouter>
     );
 };
