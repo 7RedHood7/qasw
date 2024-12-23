@@ -8,11 +8,16 @@ import {addItem} from "../../redux/cart";
 
 export const Catalog: React.FC = () => {
     const products = useSelector((state: RootState) => state.products.products);
+    const categoryId = useSelector((state: RootState) => state.filter.categoryId);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
         dispatch(fetchProducts());
     }, [dispatch]);
+
+    const filteredProducts = categoryId
+        ? products.filter((product) => product.brand === categoryId)
+        : products;
 
     const addToCart = (product: any) => {
         dispatch(
@@ -22,14 +27,14 @@ export const Catalog: React.FC = () => {
                 brand: product.brand,
                 price: product.regular_price.value,
                 image: product.image,
-                quantity: 1, // Начальное количество
+                quantity: 1
             })
         );
     };
 
     return (
         <div className="catalog">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
                 <div key={product.id} className="product-block">
                     <img
                         className="product-block__image"
